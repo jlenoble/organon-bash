@@ -17,3 +17,16 @@ Solution: Add the following two line inside the sourcing script:
 SCRIPTDIR=$(find-script-dir ${BASH_SOURCE[0]})
 . "$SCRIPTDIR/includes/file.inc"
 ```
+
+### make-index-file
+
+A directory may contain an indeterminate number of files to source. Rather than rediscovering
+them every time, create an index file that sources them all.
+
+```bash
+# dir contains f1.bashrc and f2.bashrc
+make-index-file dir
+# creates dir/index.bashrc with content:
+# . dir/f1.bashrc
+# . dir/f2.bashrc
+```
