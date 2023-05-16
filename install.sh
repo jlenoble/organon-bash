@@ -9,14 +9,14 @@ fi
 
 # Collect and install scripts in $BIN_DIR
 # Don't overwrite if already there, but suggest manual install
-find . \
+find $(readlink -f .) -type f \
 | grep \.bash$ \
+| sed 's/\.bash$//;/\/\.bash/d' \
 | xargs -i sh -c "\
-    if [ ! -f $BIN_DIR/\$(basename {}) ]; then \
-        cp {} $BIN_DIR; \
+    if [ ! -L $BIN_DIR/\$(basename {}) ]; then \
+        ln -s {}.bash $BIN_DIR/\$(basename {}); \
     else \
         echo {} already installed >&2; \
-        echo you may use \'install-script {}\' instead >&2; \
         echo; \
     fi"
 
