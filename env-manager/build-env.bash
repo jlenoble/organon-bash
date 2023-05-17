@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+AVATAR=${1:-unknown}
+
 include-bashrc-sources() {
-    sed -i -E "s%^\s*(\.|source)\s+(\S+)$% \
+    sed -i -E "s:\\\$AVATAR:$AVATAR:;s%^\s*(\.|source)\s+(\S+)$% \
         if [ -f $BASHRC_DIR/\2 ]; then \
             cat $BASHRC_DIR/\2; \
         elif [ -f \2 ]; then \
@@ -42,4 +44,4 @@ done
 cat "$TMP_BASHRC_FILE" | sed  "/^\s*#/d"
 
 unset include-bashrc-sources make-index-files
-unset SCRIPT_DIR BASHRC_DIR MAIN_FILE TMP_BASHRC_FILE PREVIOUS_TMP_BASHRC_FILE
+unset AVATAR SCRIPT_DIR BASHRC_DIR MAIN_FILE TMP_BASHRC_FILE PREVIOUS_TMP_BASHRC_FILE

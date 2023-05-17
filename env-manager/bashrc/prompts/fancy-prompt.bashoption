@@ -1,0 +1,137 @@
+#!/bin/bash
+
+. avatars/default.bashrc
+
+# Compute the RGB escape sequence for setting the terminal background
+bg_rgb() {
+	local output=$1
+	eval $output="'\[\033[48;2;$2;$3;${4}m\]'"
+}
+
+# Compute the effect and RGB escape sequence for setting the terminal foreground
+fg_rgb() {
+	local output=$1
+	eval $output="'\[\033[1;38;2;$2;$3;${4}m\]'"
+}
+
+right_prompt() {
+	# task context
+	local context="$(task _get rc.context)"
+
+	if [ -z "$context" ]; then
+		context=" no context "
+	else
+	    context=" $context "
+	fi
+
+	local raw_context=$context
+
+	local context_fg
+	local context_bg
+	fg_rgb context_fg 225 225 225
+	bg_rgb context_bg 0 95 0
+
+	context="$context_fg$context_bg$raw_context\[\033[0m\]"
+
+	# tasks left
+	local ntasks="$(task +PENDING count 2> /dev/null)"
+	local raw_ntasks=" $ntasks task(s) left "
+
+	local ntasks_fg
+	local ntasks_bg
+	fg_rgb ntasks_fg 225 225 225
+	bg_rgb ntasks_bg 175 95 0
+
+	ntasks="$ntasks_fg$ntasks_bg$raw_ntasks\[\033[0m\]"
+
+	RAW_RIGHT_PROMPT="$raw_context$raw_ntasks"
+	RIGHT_PROMPT="$context$ntasks"
+}
+
+left_prompt() {
+	# whoami
+	local user_fg
+	local user_bg
+	fg_rgb user_fg $USER_FONT_COLOR
+	bg_rgb user_bg $USER_COLOR
+
+	user=$"$user_fg$user_bg $USER_EMBLEM $USER \[\033[0m\]"
+
+	# which host
+	local host_fg
+	local host_bg
+	fg_rgb host_fg 225 225 225
+	bg_rgb host_bg 85 87 83
+
+	host=$"$host_fg$host_bg $HOSTNAME \[\033[0m\]"
+
+	# pwd
+	local npwd_fg
+	local npwd_bg
+	fg_rgb npwd_fg 225 225 225
+	bg_rgb npwd_bg 46 52 54
+
+	npwd="$npwd_fg$npwd_bg ${NEW_PWD} \[\033[0m\]"
+	
+	local prefix_color
+	fg_rgb prefix_color $USER_COLOR
+
+	RAW_LEFT_PROMPT="┌─ $USER_EMBLEM $USER  $HOSTNAME  ${NEW_PWD} "
+	LEFT_PROMPT="\n$prefix_color┌─\[\033[0m\]$user$host$npwd"
+
+	if [ ! -z "$VIRTUAL_ENV" ]; then
+		FANCY_VENV_PROMPT=" (.venv) "
+	else
+		FANCY_VENV_PROMPT=""
+	fi
+
+	PROMPT_PREFIX="\n$prefix_color└─$FANCY_VENV_PROMPT\\$\[\033[0m\] "
+}
+
+## Copyright (c) 2018, Andres Gongora <mail@andresgongora.com>.
+##
+##	ARRANGE $PWD AND STORE IT IN $NEW_PWD
+##	* The home directory (HOME) is replaced with a ~
+##	* The last pwdmaxlen characters of the PWD are displayed
+##	* Leading partial directory names are striped off
+##		/home/me/stuff -> ~/stuff (if USER=me)
+##		/usr/share/big_dir_name -> ../share/big_dir_name (if pwdmaxlen=20)
+##
+##	Original source: WOLFMAN'S color bash promt
+##	https://wiki.chakralinux.org/index.php?title=Color_Bash_Prompt#Wolfman.27s
+bash_prompt_command() {
+	# How many characters of the $PWD should be kept
+	local pwdmaxlen=25
+
+	# Indicate that there has been dir truncation
+	local trunc_symbol=".."
+
+	# Store local dir
+	local dir=${PWD##*/}
+
+	# Which length to use
+	pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
+
+	NEW_PWD=${PWD/#$HOME/\~}
+	
+	local pwdoffset=$(( ${#NEW_PWD} - pwdmaxlen ))
+
+	# Generate name
+	if [ ${pwdoffset} -gt "0" ]
+	then
+		NEW_PWD=${NEW_PWD:$pwdoffset:$pwdmaxlen}
+		NEW_PWD=${trunc_symbol}/${NEW_PWD#*/}
+	fi
+
+	# First run, fix init window width (computed *after* PS1 is set up unfortunately)
+	if [ -z "$LEFT_PROMPT" ]; then
+		COLUMNS="95"
+	fi
+
+	left_prompt
+	right_prompt
+
+	PS1=$(printf "%s%*c%s\n" "$LEFT_PROMPT" $(($COLUMNS-${#RAW_RIGHT_PROMPT}-${#RAW_LEFT_PROMPT} - $USER_EMBLEM_OFFSET)) ' ' "$RIGHT_PROMPT")"$PROMPT_PREFIX"
+}
+
+PROMPT_COMMAND=bash_prompt_command

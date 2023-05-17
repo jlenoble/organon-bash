@@ -1,0 +1,1 @@
+. prompts/fancy-prompt.bashoption
