@@ -26,10 +26,11 @@ make-index-files() {
 
 SCRIPT_DIR=$( find-script-dir ${BASH_SOURCE[0]} )
 BASHRC_DIR="$SCRIPT_DIR/bashrc"
+TMP_DIR="$SCRIPT_DIR/.tmp"
 
 MAIN_FILE="$BASHRC_DIR/index.bashrc"
-TMP_BASHRC_FILE="$SCRIPT_DIR/tmp.bashrc"
-PREVIOUS_TMP_BASHRC_FILE="$SCRIPT_DIR/previous_tmp.bashrc"
+TMP_BASHRC_FILE="$TMP_DIR/bashrc.tmp"
+PREVIOUS_TMP_BASHRC_FILE="$TMP_DIR/previous_bashrc.tmp"
 
 make-index-files
 
