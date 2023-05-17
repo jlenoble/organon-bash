@@ -1,5 +1,5 @@
 # Transient files when building .bashrc
-tmp.bashrc
+*tmp.bashrc
 index.bashrc
 
 # Examples of bash config files from various sources, including own

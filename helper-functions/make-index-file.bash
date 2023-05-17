@@ -12,7 +12,7 @@ make-index-file() {
     fi
 
     find "$DIR" -type f \
-    | sed -E "/index.bashrc$/d;s/^(.*\.bashrc)$/. &/" > "$DIR/index.bashrc"
+    | sed -E "/index.bashrc$/d;/^.*\.bashrc$/!d;s/^(.*\.bashrc)$/. &/" > "$DIR/index.bashrc"
 }
 
 make-index-file $1
