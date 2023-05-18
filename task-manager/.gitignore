@@ -1,0 +1,3 @@
+# Transient files when building .taskrc
+index.taskrc
+.tmp
