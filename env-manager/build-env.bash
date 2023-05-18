@@ -38,6 +38,10 @@ SCRIPT_DIR=$( find-script-dir ${BASH_SOURCE[0]} )
 BASHRC_DIR="$SCRIPT_DIR/bashrc"
 TMP_DIR="$SCRIPT_DIR/.tmp"
 
+if [ ! -d "$TMP_DIR" ]; then
+    mkdir "$TMP_DIR"
+fi
+
 MAIN_FILE="$BASHRC_DIR/index.bashrc"
 TMP_BASHRC_FILE="$TMP_DIR/bashrc.tmp"
 PREVIOUS_TMP_BASHRC_FILE="$TMP_DIR/previous_bashrc.tmp"
