@@ -1,5 +1,34 @@
 #!/usr/bin/env bash
 
+get-deps() {
+    sed -E "s:\\\$AVATAR:$AVATAR:;/^\s*(\.|source)\s+(\S+)$/!d;s%^\s*(\.|source)\s+(\S+)$% \
+        if [ -f $BASHRC_DIR/\2 ]; then \
+            echo $BASHRC_DIR/\2; \
+        elif [ -f \2 ]; then \
+            echo \2; \
+        fi \
+    %e" $1
+}
+
+_collect-deps() {
+  echo "$1"
+  local -a list=($(get-deps "$1"))
+  seen["$1"]=1
+  local -i cnt=${#list[@]}
+  if (( cnt > 0 )); then
+    for f in "${list[@]}"; do
+      if ! [[ -v seen["$f"] ]]; then
+        _collect-deps "$f"
+      fi
+    done
+  fi
+}
+
+collect-deps() {
+    local -A seen
+    _collect-deps "$1"
+}
+
 set-avatar() {
     local preset_avatars=$(
         ls "$BASHRC_DIR/avatars" \
@@ -69,11 +98,14 @@ PREVIOUS_TMP_BASHRC_FILE="$TMP_DIR/previous_bashrc.tmp"
 
 set-avatar $1
 
+TMP_DEPS=$(collect-deps "$MAIN_FILE")
+
 make-index-files
 make-tmp-bashrc
 
 cat "$TMP_BASHRC_FILE" | sed  "/^\s*#/d"
 
+unset get-deps _collect-deps collect-deps
 unset set-avatar
 unset include-bashrc-sources make-index-files
 unset make-tmp-bashrc
@@ -82,3 +114,4 @@ unset AVATAR
 unset SCRIPT_DIR BASHRC_DIR TMP_DIR
 unset MAIN_FILE
 unset TMP_BASHRC_FILE PREVIOUS_TMP_BASHRC_FILE
+unset TMP_DEPS
