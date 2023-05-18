@@ -1,0 +1,8 @@
+# Don't commit whatever code snipet I am currently working on
+#
+# When installing (./install.sh), link ~/bin/sandbox is created.
+# The idea is to dynamically edit hidden file sandbox.bash  with
+# dev code snipets, ideas or tentative solutions. By running command
+# `sandbox` from anywhere, we can explore them in a quick and
+# dirty way.
+sandbox.bash
