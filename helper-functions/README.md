@@ -30,3 +30,32 @@ make-index-file dir
 # . dir/f1.bashrc
 # . dir/f2.bashrc
 ```
+
+### mangle-name and unmangle-name
+
+`mangle-name` outputs a *quasi* reversible identifier based on a FILE_PATH and an optional
+RELATIVE_PATH (defaults to `pwd`). *Quasi* means that FILE_PATH may be restored
+by `unmangle-path` to its original value or to an *equivalent* path.
+
+Underneath, both scripts work with `realpath`, which ensures the unicity of the target file
+by enforcing actual paths only (dir names must point to actual dirs, base names are free).
+
+```bash
+# Usage:
+#   mangle-name FILE_PATH [RELATIVE_PATH]
+
+cd # cwd is $HOME
+echo $USER # I am jason
+
+mangle-name ~/.bashrc # Outputs: _2bashrc
+unmangle-name _2bashrc # Outputs: /home/jason/.bashrc
+
+mangle-name ~/.bashrc / # Outputs: home_1jason_1_2bashrc
+unmangle-name _2bashrc / # Outputs: /home/jason/.bashrc
+
+mangle-name /etc/apt/source.list # Outputs: _2_2_1_2_2_1etc_1apt_1source_2list
+unmangle-name _2_2_1_2_2_1etc_1apt_1source_2list # Outputs: /etc/apt/source.list
+
+mangle-name /etc/apt/source.list / # Outputs: etc_1apt_1source_2list
+unmangle-name etc_1apt_1source_2list / # Outputs: /etc/apt/source.list
+```
