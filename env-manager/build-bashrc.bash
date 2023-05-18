@@ -81,7 +81,7 @@ preprocess-source-file() {
 }
 
 
-make-func-files() {
+make-tmp-func-files() {
     # .func files are saved in $TMP_DIR. When run (only once each), they
     # output a mangled string that marks the order in which the corresponding
     # snipet code should be included in .bashrc.
@@ -161,14 +161,14 @@ set-avatar $1
 TMP_DEPS=$(collect-deps "$MAIN_FILE")
 
 make-index-files
-make-func-files
+make-tmp-func-files
 make-tmp-bashrc
 
 cat "$TMP_BASHRC_FILE" | sed  "/^\s*#/d"
 
 unset get-deps _collect-deps collect-deps
 unset set-avatar preprocess-source-file
-unset make-index-files make-func-files make-tmp-bashrc
+unset make-index-files make-tmp-func-files make-tmp-bashrc
 
 unset AVATAR
 unset SCRIPT_DIR BASHRC_DIR TMP_DIR

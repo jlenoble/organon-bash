@@ -12,12 +12,12 @@ We want helper tools to streamline common tasks.
 After package install (see main [README.md](../README.md#install)), commands
 should be callable from anywhere.
 
-### build-env
+### build-bashrc
 
 ```bash
 # Outputs the generated .bashrc from all snipets within $PROJECTS_DIR/organon-bash/env-manager
-build-env
+build-bashrc
 
 # Replace current .bashrc
-build-env > ~/.bashrc
+build-bashrc > ~/.bashrc
 ```
