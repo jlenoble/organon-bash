@@ -8,9 +8,10 @@
 # Currently replaces:
 #   / with _1
 #   . with _2
+#   - with _3
 
 RELATIVE_TO=${2:-`pwd`}
 
-echo $(realpath --relative-to="$RELATIVE_TO" "$1") | sed "s|/|_1|g;s/\./_2/g"
+echo $(realpath --relative-to="$RELATIVE_TO" "$1") | sed "s|/|_1|g;s/\./_2/g;s/-/_3/g"
 
 unset RELATIVE_TO
