@@ -1,6 +1,27 @@
 #!/usr/bin/env bash
 
-AVATAR=${1:-unknown}
+set-avatar() {
+    local preset_avatars=$(
+        ls "$BASHRC_DIR/avatars" \
+        | grep "\.bashoption$" \
+        | sed -E 's/([^\.]+).*/\1/;/unknown/d'
+    )
+
+    AVATAR=${1:-unknown}
+    [ "$1" = unknown ] && return
+
+    if echo "${preset_avatars[@]}" | grep -qw "$AVATAR"; then
+        return
+    fi
+
+    local BASHRC_AVATAR=$(egrep "\s*AVATAR=" ~/.bashrc | sed -E "s/\s*AVATAR=([^\n;]+)/\1/")
+    AVATAR=${BASHRC_AVATAR:-$USER}
+    AVATAR=${AVATAR:-unknown}
+
+    if ! echo "${preset_avatars[@]}" | grep -qw "$AVATAR"; then
+        AVATAR=unknown
+    fi
+}
 
 include-bashrc-sources() {
     sed -i -E "s:\\\$AVATAR:$AVATAR:;s%^\s*(\.|source)\s+(\S+)$% \
@@ -46,10 +67,12 @@ MAIN_FILE="$BASHRC_DIR/index.bashrc"
 TMP_BASHRC_FILE="$TMP_DIR/bashrc.tmp"
 PREVIOUS_TMP_BASHRC_FILE="$TMP_DIR/previous_bashrc.tmp"
 
+set-avatar $1
+
 make-index-files
 make-tmp-bashrc
 
 cat "$TMP_BASHRC_FILE" | sed  "/^\s*#/d"
 
-unset include-bashrc-sources make-index-files make-tmp-bashrc
+unset set-avatar include-bashrc-sources make-index-files make-tmp-bashrc
 unset AVATAR SCRIPT_DIR BASHRC_DIR MAIN_FILE TMP_BASHRC_FILE PREVIOUS_TMP_BASHRC_FILE
