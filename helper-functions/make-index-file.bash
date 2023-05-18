@@ -4,15 +4,9 @@
 # Usage:
 #    make-index-file $DIR
 
-make-index-file() {
-    local DIR=$1
+if [ ! -d "$1" ]; then
+    exit 1
+fi
 
-    if [ ! -d "$DIR" ]; then
-        exit 1
-    fi
-
-    find "$DIR" -type f \
-    | sed -E "/index.bashrc$/d;/^.*\.bashrc$/!d;s/^(.*\.bashrc)$/. &/" > "$DIR/index.bashrc"
-}
-
-make-index-file $1
+find "$1" -type f \
+| sed -E "/index.bashrc$/d;/^.*\.bashrc$/!d;s/^.*\.bashrc$/. &/" > "$1/index.bashrc"
