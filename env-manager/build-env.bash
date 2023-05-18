@@ -74,5 +74,11 @@ make-tmp-bashrc
 
 cat "$TMP_BASHRC_FILE" | sed  "/^\s*#/d"
 
-unset set-avatar include-bashrc-sources make-index-files make-tmp-bashrc
-unset AVATAR SCRIPT_DIR BASHRC_DIR MAIN_FILE TMP_BASHRC_FILE PREVIOUS_TMP_BASHRC_FILE
+unset set-avatar
+unset include-bashrc-sources make-index-files
+unset make-tmp-bashrc
+
+unset AVATAR
+unset SCRIPT_DIR BASHRC_DIR TMP_DIR
+unset MAIN_FILE
+unset TMP_BASHRC_FILE PREVIOUS_TMP_BASHRC_FILE
