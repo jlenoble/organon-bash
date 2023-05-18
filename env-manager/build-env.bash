@@ -24,6 +24,16 @@ make-index-files() {
     | xargs -i sh -c "make-index-file {}; echo . {}/index.bashrc >> $MAIN_FILE"
 }
 
+make-tmp-bashrc() {
+    echo "" > "$PREVIOUS_TMP_BASHRC_FILE"
+    cp "$MAIN_FILE" "$TMP_BASHRC_FILE"
+
+    while ! diff "$TMP_BASHRC_FILE" "$PREVIOUS_TMP_BASHRC_FILE" > /dev/null 2>&1; do
+        cp "$TMP_BASHRC_FILE" "$PREVIOUS_TMP_BASHRC_FILE"
+        include-bashrc-sources "$TMP_BASHRC_FILE"
+    done
+}
+
 SCRIPT_DIR=$( find-script-dir ${BASH_SOURCE[0]} )
 BASHRC_DIR="$SCRIPT_DIR/bashrc"
 TMP_DIR="$SCRIPT_DIR/.tmp"
@@ -33,16 +43,9 @@ TMP_BASHRC_FILE="$TMP_DIR/bashrc.tmp"
 PREVIOUS_TMP_BASHRC_FILE="$TMP_DIR/previous_bashrc.tmp"
 
 make-index-files
-
-echo "" > "$PREVIOUS_TMP_BASHRC_FILE"
-cp "$MAIN_FILE" "$TMP_BASHRC_FILE"
-
-while ! diff "$TMP_BASHRC_FILE" "$PREVIOUS_TMP_BASHRC_FILE" > /dev/null 2>&1; do
-    cp "$TMP_BASHRC_FILE" "$PREVIOUS_TMP_BASHRC_FILE"
-    include-bashrc-sources "$TMP_BASHRC_FILE"
-done
+make-tmp-bashrc
 
 cat "$TMP_BASHRC_FILE" | sed  "/^\s*#/d"
 
-unset include-bashrc-sources make-index-files
+unset include-bashrc-sources make-index-files make-tmp-bashrc
 unset AVATAR SCRIPT_DIR BASHRC_DIR MAIN_FILE TMP_BASHRC_FILE PREVIOUS_TMP_BASHRC_FILE
