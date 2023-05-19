@@ -4,6 +4,15 @@ Abstracting out common script operations.
 
 ## Scripts
 
+### collect-deps
+
+Explore a file and its dependencies (in the form `. file_path` or `source file_path`)
+and prints them all uniquely to screen.
+
+```bash
+collect-deps MAIN_FILE AVATAR
+```
+
 ### find-script-dir
 
 A script may be run from anywhere but may rely on includes whose locations are only known
