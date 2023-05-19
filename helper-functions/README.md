@@ -39,7 +39,7 @@ get-avatar root # root
 get-avatar unknown # unknown
 ```
 
-### make-index-file
+### make-index-file and make-index-files
 
 A directory may contain an indeterminate number of files to source. Rather than rediscovering
 them every time, create an index file that sources them all.
@@ -51,6 +51,8 @@ make-index-file dir
 # . dir/f1.bashrc
 # . dir/f2.bashrc
 ```
+
+`make-index-files` apply `make-index-file` recursively.
 
 ### mangle-name and unmangle-name
 
