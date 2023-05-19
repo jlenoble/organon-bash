@@ -97,9 +97,12 @@ PREVIOUS_TMP_TASKRC_FILE="$TMP_DIR/previous_taskrc.tmp"
 EXTENSION=.taskrc
 
 AVATAR=$(get-avatar $1)
+
+make-index-files "$MAIN_FILE"
+
+# Must be *after* make-index-files, to make sure indexes exist
 TMP_DEPS=$(collect-deps "$MAIN_FILE")
 
-make-index-files "$MAIN_FILE" "taskrc"
 make-tmp-func-files
 make-tmp-taskrc
 

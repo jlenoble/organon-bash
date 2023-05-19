@@ -95,9 +95,12 @@ TMP_BASHRC_FILE="$TMP_DIR/bashrc.tmp"
 PREVIOUS_TMP_BASHRC_FILE="$TMP_DIR/previous_bashrc.tmp"
 
 AVATAR=$(get-avatar $1 "$BASHRC_DIR")
+
+make-index-files "$MAIN_FILE"
+
+# Must be *after* make-index-files, to make sure indexes exist
 TMP_DEPS=$(collect-deps "$MAIN_FILE" "$AVATAR")
 
-make-index-files "$MAIN_FILE" "bashrc"
 make-tmp-func-files
 make-tmp-bashrc
 
