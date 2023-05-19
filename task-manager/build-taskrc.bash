@@ -94,8 +94,6 @@ MAIN_FILE="$TASKRC_DIR/index.taskrc"
 TMP_TASKRC_FILE="$TMP_DIR/taskrc.tmp"
 PREVIOUS_TMP_TASKRC_FILE="$TMP_DIR/previous_taskrc.tmp"
 
-EXTENSION=.taskrc
-
 AVATAR=$(get-avatar $1)
 
 make-index-files "$MAIN_FILE"
@@ -112,7 +110,7 @@ unset get-deps _collect-deps collect-deps
 unset set-avatar preprocess-source-file
 unset make-index-files make-tmp-func-files make-tmp-taskrc
 
-unset AVATAR EXTENSION
+unset AVATAR
 unset SCRIPT_DIR TASKRC_DIR TMP_DIR
 unset MAIN_FILE
 unset TMP_TASKRC_FILE PREVIOUS_TMP_TASKRC_FILE
