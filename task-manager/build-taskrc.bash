@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-make-index-files() {
-    local escaped_pattern=$(sed "s:/:\\\\/:g" <<< $TASKRC_DIR)
-
-    rm $MAIN_FILE
-
-    find $TASKRC_DIR -type d \
-    | sed "/^$escaped_pattern$/d" \
-    | xargs -i sh -c "make-index-file {}  '$EXTENSION'; echo . {}/index.taskrc >> $MAIN_FILE"
-}
-
 preprocess-source-file() {
     # Make sure $AVATAR is always resolved.
     # Replace all inclusions with a magic mangled string used elsewhere
@@ -109,7 +99,7 @@ EXTENSION=.taskrc
 AVATAR=$(get-avatar $1)
 TMP_DEPS=$(collect-deps "$MAIN_FILE")
 
-make-index-files
+make-index-files "$MAIN_FILE" "taskrc"
 make-tmp-func-files
 make-tmp-taskrc
 

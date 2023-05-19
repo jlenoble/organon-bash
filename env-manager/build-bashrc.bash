@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-make-index-files() {
-    local escaped_pattern=$(sed "s:/:\\\\/:g" <<< $BASHRC_DIR)
-
-    rm $MAIN_FILE
-
-    find $BASHRC_DIR -type d \
-    | sed "/^$escaped_pattern$/d" \
-    | xargs -i sh -c "make-index-file {}; echo . {}/index.bashrc >> $MAIN_FILE"
-}
-
 preprocess-source-file() {
     # Make sure $AVATAR is always resolved.
     # Replace all inclusions with a magic mangled string used elsewhere
@@ -107,14 +97,14 @@ PREVIOUS_TMP_BASHRC_FILE="$TMP_DIR/previous_bashrc.tmp"
 AVATAR=$(get-avatar $1 "$BASHRC_DIR")
 TMP_DEPS=$(collect-deps "$MAIN_FILE" "$AVATAR")
 
-make-index-files
+make-index-files "$MAIN_FILE" "bashrc"
 make-tmp-func-files
 make-tmp-bashrc
 
 cat "$TMP_BASHRC_FILE" | sed  "/^\s*#/d"
 
 unset preprocess-source-file
-unset make-index-files make-tmp-func-files make-tmp-bashrc
+unset make-tmp-func-files make-tmp-bashrc
 
 unset AVATAR
 unset SCRIPT_DIR BASHRC_DIR TMP_DIR
