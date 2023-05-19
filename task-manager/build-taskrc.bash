@@ -7,8 +7,8 @@ preprocess-source-file() {
     # This is a trick to determine in which order to include snipets
     if [ -f $1 ]; then
         cat $1 | sed -E "s:\\\$AVATAR:$AVATAR:;s%^(\s*)(\.|source)\s+(\S+)$% \
-            if [ -f $TASKRC_DIR/\3 ]; then \
-                echo '\1'\\\$(mangle-name $TASKRC_DIR/\3 $SCRIPT_DIR); \
+            if [ -f $MAIN_DIR/\3 ]; then \
+                echo '\1'\\\$(mangle-name $MAIN_DIR/\3 $SCRIPT_DIR); \
             elif [ -f \3 ]; then \
                 echo '\1'\\\$(mangle-name \3 $SCRIPT_DIR); \
             else \
@@ -64,7 +64,7 @@ make-tmp-taskrc() {
     done
 
     # Add entry point to run all nested name-mangled wrapper functions
-    echo $(mangle-name "$TASKRC_DIR/index.taskrc" $SCRIPT_DIR) >> "$TMP_TASKRC_FILE"
+    echo $(mangle-name "$MAIN_DIR/index.taskrc" $SCRIPT_DIR) >> "$TMP_TASKRC_FILE"
 
     # Cache the order of execution of the wrapper functions
     mv "$TMP_TASKRC_FILE" "$PREVIOUS_TMP_TASKRC_FILE"
@@ -83,14 +83,14 @@ make-tmp-taskrc() {
 }
 
 SCRIPT_DIR=$( find-script-dir ${BASH_SOURCE[0]} )
-TASKRC_DIR="$SCRIPT_DIR/taskrc"
+MAIN_DIR="$SCRIPT_DIR/taskrc"
 TMP_DIR="$SCRIPT_DIR/.tmp"
 
 if [ ! -d "$TMP_DIR" ]; then
     mkdir "$TMP_DIR"
 fi
 
-MAIN_FILE="$TASKRC_DIR/index.taskrc"
+MAIN_FILE="$MAIN_DIR/index.taskrc"
 TMP_TASKRC_FILE="$TMP_DIR/taskrc.tmp"
 PREVIOUS_TMP_TASKRC_FILE="$TMP_DIR/previous_taskrc.tmp"
 
@@ -106,12 +106,10 @@ make-tmp-taskrc
 
 cat "$TMP_TASKRC_FILE" | sed  "/^\s*#/d"
 
-unset get-deps _collect-deps collect-deps
-unset set-avatar preprocess-source-file
+unset preprocess-source-file
 unset make-index-files make-tmp-func-files make-tmp-taskrc
 
 unset AVATAR
-unset SCRIPT_DIR TASKRC_DIR TMP_DIR
-unset MAIN_FILE
+unset SCRIPT_DIR MAIN_DIR MAIN_FILE TMP_DIR
 unset TMP_TASKRC_FILE PREVIOUS_TMP_TASKRC_FILE
 unset TMP_DEPS

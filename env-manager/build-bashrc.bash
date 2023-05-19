@@ -7,8 +7,8 @@ preprocess-source-file() {
     # This is a trick to determine in which order to include snipets
     if [ -f $1 ]; then
         cat $1 | sed -E "s:\\\$AVATAR:$AVATAR:;s%^(\s*)(\.|source)\s+(\S+)$% \
-            if [ -f $BASHRC_DIR/\3 ]; then \
-                echo '\1'\\\$(mangle-name $BASHRC_DIR/\3 $SCRIPT_DIR); \
+            if [ -f $MAIN_DIR/\3 ]; then \
+                echo '\1'\\\$(mangle-name $MAIN_DIR/\3 $SCRIPT_DIR); \
             elif [ -f \3 ]; then \
                 echo '\1'\\\$(mangle-name \3 $SCRIPT_DIR); \
             else \
@@ -64,7 +64,7 @@ make-tmp-bashrc() {
     done
 
     # Add entry point to run all nested name-mangled wrapper functions
-    echo $(mangle-name "$BASHRC_DIR/index.bashrc" $SCRIPT_DIR) >> "$TMP_BASHRC_FILE"
+    echo $(mangle-name "$MAIN_DIR/index.bashrc" $SCRIPT_DIR) >> "$TMP_BASHRC_FILE"
 
     # Cache the order of execution of the wrapper functions
     mv "$TMP_BASHRC_FILE" "$PREVIOUS_TMP_BASHRC_FILE"
@@ -83,18 +83,18 @@ make-tmp-bashrc() {
 }
 
 SCRIPT_DIR=$( find-script-dir ${BASH_SOURCE[0]} )
-BASHRC_DIR="$SCRIPT_DIR/bashrc"
+MAIN_DIR="$SCRIPT_DIR/bashrc"
 TMP_DIR="$SCRIPT_DIR/.tmp"
 
 if [ ! -d "$TMP_DIR" ]; then
     mkdir "$TMP_DIR"
 fi
 
-MAIN_FILE="$BASHRC_DIR/index.bashrc"
+MAIN_FILE="$MAIN_DIR/index.bashrc"
 TMP_BASHRC_FILE="$TMP_DIR/bashrc.tmp"
 PREVIOUS_TMP_BASHRC_FILE="$TMP_DIR/previous_bashrc.tmp"
 
-AVATAR=$(get-avatar $1 "$BASHRC_DIR")
+AVATAR=$(get-avatar $1 "$MAIN_DIR")
 
 make-index-files "$MAIN_FILE"
 
@@ -110,7 +110,6 @@ unset preprocess-source-file
 unset make-tmp-func-files make-tmp-bashrc
 
 unset AVATAR
-unset SCRIPT_DIR BASHRC_DIR TMP_DIR
-unset MAIN_FILE
+unset SCRIPT_DIR MAIN_DIR MAIN_FILE TMP_DIR
 unset TMP_BASHRC_FILE PREVIOUS_TMP_BASHRC_FILE
 unset TMP_DEPS
