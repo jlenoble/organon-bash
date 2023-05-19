@@ -29,29 +29,6 @@ collect-deps() {
     _collect-deps "$1"
 }
 
-set-avatar() {
-    local preset_avatars=$(
-        ls "$BASHRC_DIR/avatars" \
-        | grep "\.bashoption$" \
-        | sed -E 's/([^\.]+).*/\1/;/unknown/d'
-    )
-
-    AVATAR=${1:-unknown}
-    [ "$1" = unknown ] && return
-
-    if echo "${preset_avatars[@]}" | grep -qw "$AVATAR"; then
-        return
-    fi
-
-    local TASKRC_AVATAR=$(egrep "\s*AVATAR=" ~/.taskrc | sed -E "s/\s*AVATAR=([^\n;]+)/\1/")
-    AVATAR=${TASKRC_AVATAR:-$USER}
-    AVATAR=${AVATAR:-unknown}
-
-    if ! echo "${preset_avatars[@]}" | grep -qw "$AVATAR"; then
-        AVATAR=unknown
-    fi
-}
-
 make-index-files() {
     local escaped_pattern=$(sed "s:/:\\\\/:g" <<< $TASKRC_DIR)
 
@@ -146,7 +123,6 @@ make-tmp-taskrc() {
 
 SCRIPT_DIR=$( find-script-dir ${BASH_SOURCE[0]} )
 TASKRC_DIR="$SCRIPT_DIR/taskrc"
-BASHRC_DIR="$SCRIPT_DIR/../env-manager/bashrc"
 TMP_DIR="$SCRIPT_DIR/.tmp"
 
 if [ ! -d "$TMP_DIR" ]; then
@@ -159,8 +135,7 @@ PREVIOUS_TMP_TASKRC_FILE="$TMP_DIR/previous_taskrc.tmp"
 
 EXTENSION=.taskrc
 
-set-avatar $1
-
+AVATAR=$(get-avatar $1)
 TMP_DEPS=$(collect-deps "$MAIN_FILE")
 
 make-index-files
