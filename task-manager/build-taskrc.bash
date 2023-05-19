@@ -1,34 +1,5 @@
 #!/usr/bin/env bash
 
-get-deps() {
-    sed -E "s:\\\$AVATAR:$AVATAR:;/^\s*(\.|source)\s+(\S+)$/!d;s%^\s*(\.|source)\s+(\S+)$% \
-        if [ -f $TASKRC_DIR/\2 ]; then \
-            echo $TASKRC_DIR/\2; \
-        elif [ -f \2 ]; then \
-            echo \2; \
-        fi \
-    %e" $1
-}
-
-_collect-deps() {
-  echo "$1"
-  local -a list=($(get-deps "$1"))
-  seen["$1"]=1
-  local -i cnt=${#list[@]}
-  if (( cnt > 0 )); then
-    for f in "${list[@]}"; do
-      if ! [[ -v seen["$f"] ]]; then
-        _collect-deps "$f"
-      fi
-    done
-  fi
-}
-
-collect-deps() {
-    local -A seen
-    _collect-deps "$1"
-}
-
 make-index-files() {
     local escaped_pattern=$(sed "s:/:\\\\/:g" <<< $TASKRC_DIR)
 
