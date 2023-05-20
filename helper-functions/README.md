@@ -65,6 +65,13 @@ make-index-file dir
 # . dir/f2.bashrc
 ```
 
+### make-tmp-rc
+
+Usage: `make-tmp-rc AVATAR MAIN_FILE TMP_FILE`
+
+`MAIN_FILE` is the entry point index of all sourced files.
+`TMP_FILE` is the generated RC file, such as `.bashrc` or `.taskrc`.
+
 `make-index-files` apply `make-index-file` recursively.
 
 ### mangle-name and unmangle-name
