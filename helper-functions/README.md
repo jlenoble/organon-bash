@@ -39,6 +39,19 @@ get-avatar root # root
 get-avatar unknown # unknown
 ```
 
+### make-auxiliary-files
+
+Usage: `make-auxiliary-files AVATAR MAIN_DIR TMP_DEPS`
+
+`MAIN_DIR` is the dir relative to which all relative paths are defined.
+`TMP_DEPS`is the enumeration of all sourced file paths.
+
+Builds auxiliary files in `$MAIN_DIR/../.tmp` named like `some_mangled_string.func`
+and `some_mangled_string.tmp`. The `.func` files wrap functions calling each other
+in the same order as all sourced files should be included, allowing to build
+a concatenation order. The `.tmp` files contain the concatenated texts with the
+sourcing statements removed.
+
 ### make-index-file and make-index-files
 
 A directory may contain an indeterminate number of files to source. Rather than rediscovering
