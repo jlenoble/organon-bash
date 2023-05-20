@@ -1,0 +1,7 @@
+# Usage: task idonly
+# To keep only the first printed id: task rc.verbose: idonly | head -n1 | xargs
+report.idonly.description = Remove all columns from report except 'id'
+report.idonly.columns     = id
+report.idonly.labels      = ID
+report.idonly.sort        = urgency-
+report.idonly.filter      = +PENDING
