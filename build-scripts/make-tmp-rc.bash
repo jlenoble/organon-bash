@@ -35,7 +35,7 @@ done
 
 # Clean up .bashrc (remove comments and multiline blanks)
 mv "$tmp_file" "$old_tmp_file"
-sed -E -e "/^\s*#/d" "$old_tmp_file" | sed -e "N;/^\n$/D;P;D" > "$tmp_file" 
+sed "N;/^\n$/D;P;D" "$old_tmp_file" > "$tmp_file" 
 
 unset _AVATAR _MAIN_DIR _PARENT_DIR _TMP_DIR
 unset tmp_base tmp_file old_tmp_file
