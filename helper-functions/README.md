@@ -4,6 +4,14 @@ Abstracting out common script operations.
 
 ## Scripts
 
+### build-rc
+
+Usage: `build-rc AVATAR rc_extension real/path/to/script/file`
+
+`build-rc` orchestrates several scripts to finally output a fully fledged `rc` file content
+(such as a custom `.bashrc` or a custom `.taskrc`). The type of the file is determined
+by `$2` (rc_extension), whereas $3 helps find all source files used to build the `rc` file.
+
 ### collect-deps
 
 Explore a file and its dependencies (in the form `. file_path` or `source file_path`)
