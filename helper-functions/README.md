@@ -82,3 +82,12 @@ unmangle-name _2_2_1_2_2_1etc_1apt_1source_2list # Outputs: /etc/apt/source.list
 mangle-name /etc/apt/source.list / # Outputs: etc_1apt_1source_2list
 unmangle-name etc_1apt_1source_2list / # Outputs: /etc/apt/source.list
 ```
+
+### preprocess-source-file
+
+Usage: `preprocess-source-file FILE AVATAR MAIN_DIR`
+
+`MAIN_DIR` is the dir relative to which all relative paths are defined.
+
+Outputs FILE with all $AVATAR evaluated and sourcing statements replaced
+with mangled strings built out of sourced file paths with MAIN_DIR prepended. 
