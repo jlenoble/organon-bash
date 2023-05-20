@@ -1,0 +1,4 @@
+# Remove news alerts if `news.version` matches `task --version` (discarding patch versions).
+# Must be updated every time `taskwarrior` has a new release (preferrably *after*
+# having read the news with `task news` and `task news minor`!)
+news.version=2.6.0
