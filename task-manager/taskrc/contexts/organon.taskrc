@@ -1,0 +1,4 @@
+# Switching context:
+#   task context organon
+context.organon.read=+organon
+context.organon.write=+organon
