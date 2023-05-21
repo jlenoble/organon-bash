@@ -1,3 +1,7 @@
 # Examples of bash config files from various sources, including own
 # May contain unsafe infos, so commit none
 .bash*
+
+# Tmp files and dirs
+.tmp
+index.*rc
