@@ -1,5 +1,5 @@
 alias sad='sudo apt update'
 alias sag='sudo apt upgrade'
-alias sai='sudo apt install'
+alias sai='install-pkg'
 alias sar='sudo apt remove'
 alias saa='sudo apt autoremove'
