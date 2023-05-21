@@ -8,4 +8,6 @@
 #   todo Go shopping
 #   todo Fix bug +urgent due:today
 
-task add $@ +todo
+context=$(task _get rc.context)
+
+task add $@ +${context:-todo}
