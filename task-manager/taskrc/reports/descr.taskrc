@@ -1,0 +1,8 @@
+# Usage: task rc.verbose: descr | head -n1
+report.descr.description = Remove all columns from report except 'description'
+report.descr.columns     = description
+report.descr.labels      = Description
+report.descr.sort        = urgency-
+report.descr.filter      = +PENDING
+
+
