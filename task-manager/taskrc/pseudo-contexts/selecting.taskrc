@@ -1,0 +1,4 @@
+# Switching context:
+#   task context selecting
+context.selecting.read=
+context.selecting.write=+selected
