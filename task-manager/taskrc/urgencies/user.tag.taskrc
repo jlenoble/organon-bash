@@ -1,1 +1,4 @@
 urgency.user.tag.chore.coefficient=5.0
+
+# Compensate for extra tag weight +0.1
+urgency.user.tag.selected.coefficient=-0.1
