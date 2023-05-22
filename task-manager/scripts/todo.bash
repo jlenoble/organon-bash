@@ -9,5 +9,14 @@
 #   todo Fix bug +urgent due:today
 
 context=$(task _get rc.context)
+context=${context:-todo}
 
-task add $@ +${context:-todo}
+if [[ $context =~ :select(ing|ed)$ ]]; then
+    context=$(sed -E "s/:select(ing|ed)$//" <<<"$context")
+
+    if [ $context = none ]; then
+        context=todo
+    fi
+fi
+
+task add $@ +$context
