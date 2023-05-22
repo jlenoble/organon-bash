@@ -1,6 +1,6 @@
 # Task scripts
 
-## achieve
+## complete-task
 
 ```bash
 task
@@ -8,12 +8,12 @@ task
 #  1  8s chore Do the dishes    5.8
 #  2  5s chore Wash the laundry 5.8
 #  3  1s chore Go shopping      5.8
-achieve
+complete-task
 task
 # ID Age Tag   Description      Urg
 #  1  8s chore Wash the laundry 5.8
 #  2  4s chore Go shopping      5.8
-achieve 2
+complete-task 2
 # ID Age Tag   Description      Urg
 #  1 11s chore Wash the laundry 5.8
 ```
