@@ -6,16 +6,34 @@
 
 context=$(task _get rc.context)
 context=${context:-none}
+count=$(task +PENDING count 2> /dev/null)
 _SCRIPT_DIR=$(find-script-dir ${BASH_SOURCE[0]})
 _CONTEXTS_DIR="$_SCRIPT_DIR/../../task-manager/taskrc/contexts"
 
-if [ -z $1 ]; then
+_cycle-context() {
     cycle-context $(sed -E "s/:selecting$//" <<<"$context") "$_CONTEXTS_DIR"
+    count=$(task +PENDING count 2> /dev/null)
+    context=$(task _get rc.context)
+    context=${context:-none}
+    if [ $count = 0 ]; then
+        echo No task left in context "'$context'" >&2
+    fi
+}
+
+_maybe-skip-context() {
+    while [ $count = 0 ] && [ $context != none ]; do
+        _cycle-context
+    done
+}
+
+if [ -z $1 ]; then
+    _cycle-context
+    _maybe-skip-context
     exit
 fi
 
 if [ $1 != workon ]; then
-    task +workon mod -workon -parent
+    task +workon mod -workon -parent 2> /dev/null
 fi
 
 if [ $1 = selecting ]; then
