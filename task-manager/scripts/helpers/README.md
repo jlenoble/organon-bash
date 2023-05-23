@@ -1,5 +1,9 @@
 # Task helper scripts
 
+## clean-task-description
+
+trim $1, remove extra spaces, convert all to lower case.
+
 ## cycle-context
 
 ```bash
