@@ -75,3 +75,7 @@ task
 ## unselect-task
 
 Unmark a task or several using `-selected`: selection is $1.
+
+## workon
+
+Make `task_id $1` the sole context.
