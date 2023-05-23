@@ -51,7 +51,12 @@ Same as `chore`, but implicit tag is `+organon`and no special urgency
 
 ## switch-context
 
-For now, just cycle through context and do set them even if no related tasks.
+If current context is a registered context then just cycle through contexts and just set the next one.
+
+If $1 is `selecting`, merge this pseudo-context with the current one, so that newly created tasks are
+also marked as `selected`
+
+If $1 is not `workon`, always remove tags `workon` and `parent` for display consistency.
 
 ## todo
 

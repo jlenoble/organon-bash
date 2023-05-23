@@ -6,12 +6,19 @@
 
 context=$(task _get rc.context)
 context=${context:-none}
-_SCRIPT_DIR=$(find-script-dir  ${BASH_SOURCE[0]})
+_SCRIPT_DIR=$(find-script-dir ${BASH_SOURCE[0]})
 _CONTEXTS_DIR="$_SCRIPT_DIR/../../task-manager/taskrc/contexts"
 
 if [ -z $1 ]; then
     cycle-context $(sed -E "s/:selecting$//" <<<"$context") "$_CONTEXTS_DIR"
-elif [ $1 = selecting ]; then
+    exit
+fi
+
+if [ $1 != workon ]; then
+    task +workon mod -workon -parent
+fi
+
+if [ $1 = selecting ]; then
     if [[ $context =~ :selecting$ ]]; then
         tmp_context=$context
     else
