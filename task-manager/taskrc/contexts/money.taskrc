@@ -1,0 +1,4 @@
+# Switching context:
+#   task context money
+context.money.read=+money
+context.money.write=+money

@@ -1,0 +1,4 @@
+# Switching context:
+#   task context health
+context.health.read=+health
+context.health.write=+health
