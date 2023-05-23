@@ -1,0 +1,6 @@
+# Google Text-to-Speech
+
+. apt/build-essential.aptrc
+. apt/pipx.aptrc
+
+pipx install gtts
