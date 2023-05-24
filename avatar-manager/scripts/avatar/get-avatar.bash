@@ -13,7 +13,7 @@ _BASHRC_DIR=${2:-$BASHRC_DIR}
 # Otherwise it should be able to infer it from this script location
 if [ -z $_BASHRC_DIR ]; then
     _SCRIPT_DIR=$( find-script-dir ${BASH_SOURCE[0]} )
-    _BASHRC_DIR="$_SCRIPT_DIR/../env-manager/bashrc"
+    _BASHRC_DIR="$_SCRIPT_DIR/../../../env-manager/bashrc"
 else
     _SCRIPT_DIR=""
 fi

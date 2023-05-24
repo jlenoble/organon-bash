@@ -35,18 +35,6 @@ SCRIPTDIR=$(find-script-dir ${BASH_SOURCE[0]})
 . "$SCRIPTDIR/includes/file.inc"
 ```
 
-### get-avatar
-
-```bash
-# If BASHRC_DIR/avatars/USER.bashoption exists
-get-avatar # $USER
-get-avatar $USER # $USER
-get-avatar my_defined_avatar # my_defined_avatar
-get-avatar my_undefined_avatar # $USER
-get-avatar root # root
-get-avatar unknown # unknown
-```
-
 ### make-auxiliary-files
 
 Usage: `make-auxiliary-files AVATAR MAIN_DIR TMP_DEPS`
