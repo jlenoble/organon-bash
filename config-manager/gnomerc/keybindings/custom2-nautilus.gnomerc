@@ -1,0 +1,4 @@
+[settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+binding='<Control><Alt>f'
+command='nautilus'
+name='Fichiers'

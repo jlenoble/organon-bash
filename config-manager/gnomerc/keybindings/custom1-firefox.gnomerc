@@ -1,0 +1,4 @@
+[settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+binding='<Control><Alt>n'
+command='firefox'
+name='Firefox'

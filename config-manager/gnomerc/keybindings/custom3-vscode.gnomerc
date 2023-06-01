@@ -1,0 +1,4 @@
+[settings-daemon/plugins/media-keys/custom-keybindings/custom3]
+binding='<Control><Alt>c'
+command='code /home/jason/bookworm-config'
+name='VS Code'
