@@ -1,0 +1,12 @@
+[/]
+prompt-on-delete-profile=true
+recent-session-files=['/home/jason/.config/tilix/task-workspace.json']
+warn-vte-config-issue=false
+
+[profiles]
+list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d', '57e6f8d2-1359-4b48-b245-e0776bdd6aed', '8a45b08a-de41-46f1-8d35-691eda6d68e9', '13bffe3b-cab0-4543-9252-ff873e4b29bf']
+
+. profiles/default.tilixrc
+. profiles/current-task-monitor.tilixrc
+. profiles/backup-monitor.tilixrc
+. profiles/git-log-monitor.tilixrc

@@ -1,0 +1,9 @@
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+custom-command=''
+default-size-columns=95
+exit-action='close'
+font='DejaVu Sans Mono 12'
+login-shell=false
+use-custom-command=false
+use-system-font=false
+visible-name='Par défaut'
