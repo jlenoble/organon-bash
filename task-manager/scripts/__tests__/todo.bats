@@ -1,6 +1,6 @@
 setup() {
     export TASKRC=$HOME/.taskrc-test
-    cp $HOME/.taskrc $TASKRC
+    cat $HOME/.taskrc | sed -e '/context=.*/d' >$TASKRC
 
     export TASKDATA=$HOME/.task-test
     rm -rf $TASKDATA
@@ -28,4 +28,12 @@ setup() {
     [ $(task _get 1.tags) = "todo" ]
     [ $(task _get 2.description) = "B" ]
     [ $(task _get 2.tags) = "todo" ]
+}
+
+@test "'todo A' in context money creates a single task 'A' with tag 'todo'" {
+    task context money
+    todo A
+    [ $(task count) = 1 ]
+    [ $(task _get 1.description) = "A" ]
+    [ $(task _get 1.tags) = "todo" ]
 }
