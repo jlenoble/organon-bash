@@ -9,16 +9,24 @@ _tag=$1
 if [[ "$_tag" =~ ^[[:alpha:]][[:alnum:]]*$ ]]; then
     shift
 
+    _context_tag=$(task _get rc.context)
+    _context_tag=${_context_tag:-todo}
+
     # then if first arg passed along is an integer, then modify the associated task
     # by tagging it with _tag, and maybe remove a todo tag
     if [[ "$1" =~ ^[0-9]+$ ]]; then
         id=$1
         shift
 
-        task $id mod $@ -todo +$_tag
+        task $id mod $@ -todo -$_context_tag +$_tag
     # else create a new task from all passed along args and tag it with _tag
     else
-        task add $@ +$_tag
+        command=$(task add $@ +$_tag)
+        id=$(echo $command | grep -o -E '[0-9]+')
+
+        if [ $_context_tag != $_tag ]; then
+            task $id mod -$_context_tag
+        fi
     fi
 # else abort
 else
