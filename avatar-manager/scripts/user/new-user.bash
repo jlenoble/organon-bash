@@ -11,6 +11,7 @@ fi
 if can-create-user-safely "$name"; then
     echo "- creating user $name and home directory /home/$name"
     sudo useradd -s /bin/bash -d "/home/$name/" -G "$parent_avatar" -m "$name" && sudo passwd "$name"
+    sudo chmod 750 "/home/$name/"
 
     upgrade-user "$name"
 fi
