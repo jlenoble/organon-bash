@@ -34,9 +34,19 @@ if [ ! -f "$target_dir/.taskrc" ]; then
 fi
 
 # Custom .bashrc
+echo "- creating .bashrc"
 build-bashrc $user >bashrc_content
 scp bashrc_content $user@localhost:.bashrc
 rm -f bashrc_content
 
 # Custom .taskrc
+echo "- creating .taskrc"
 scp ~/.taskrc $user@localhost:
+
+# Gnome
+echo "- setting up Gnome"
+build-gnomerc | ssh -X $user@localhost dconf load /org/gnome/
+
+# Tilix
+echo "- setting up Tilix"
+build-tilixrc | ssh -X $user@localhost dconf load /com/gexperts/Tilix/
