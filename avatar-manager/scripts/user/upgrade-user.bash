@@ -34,8 +34,8 @@ if [ ! -f "$target_dir/.taskrc" ]; then
 fi
 
 # Custom .bashrc
-build-bashrc $user > bashrc_content
-scp bashrc_content $user@localhost:
+build-bashrc $user >bashrc_content
+scp bashrc_content $user@localhost:.bashrc
 rm -f bashrc_content
 
 # Custom .taskrc
