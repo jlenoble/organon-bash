@@ -1,4 +1,4 @@
 [settings-daemon/plugins/media-keys/custom-keybindings/custom3]
 binding='<Control><Alt>c'
-command='code /home/jason/bookworm-config'
+command='code /home/jason/Projets/organon-bash'
 name='VS Code'
