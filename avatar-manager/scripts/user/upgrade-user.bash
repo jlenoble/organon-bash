@@ -50,3 +50,10 @@ build-gnomerc | ssh -X $user@localhost dconf load /org/gnome/
 # Tilix
 echo "- setting up Tilix"
 build-tilixrc | ssh -X $user@localhost dconf load /com/gexperts/Tilix/
+
+# Git
+if [ ! -d "/home/$user/Documents" ] || [ ! -d "/home/$user/Documents/.git" ]; then
+    echo "- setting up Git"
+    scp ~/.gitconfig $user@localhost:
+    ssh -X $user@localhost "mkdir -p Documents; cd Documents; git init"
+fi
