@@ -16,3 +16,10 @@ skeepass2() {
     shift
     ssh -X $user@localhost keepass2 $@
 }
+
+# Launch KMyMoney as $1 user
+skmymoney() {
+    user=$1
+    shift
+    ssh -X $user@localhost kmymoney $@
+}
