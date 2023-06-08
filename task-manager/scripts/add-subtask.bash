@@ -91,3 +91,6 @@ esac
 
 # Update task
 task $task_id mod subtasks:$new_subtasks
+
+# Print pending tasks
+task
