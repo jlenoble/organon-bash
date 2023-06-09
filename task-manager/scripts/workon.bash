@@ -5,9 +5,12 @@ task_id=${1:-$(next-task-id)}
 if [ -z $task_id ]; then
     echo No task to work on >&2
     exit 1
-fi
-
-if ! [[ $task_id =~ ^[[:digit:]]+$ ]]; then
+elif [ $task_id == none ]; then
+    echo Now working on nothing specific
+    task context none
+    task +workon mod -workon -parent
+    exit
+elif ! [[ $task_id =~ ^[[:digit:]]+$ ]]; then
     echo task_id \"$task_id\" is not a mere integer >&2
     exit 1
 fi
