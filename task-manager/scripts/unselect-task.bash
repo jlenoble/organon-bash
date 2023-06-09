@@ -10,3 +10,5 @@ if [ -z $task_id ]; then
 fi
 
 task $task_id mod -selected
+
+task

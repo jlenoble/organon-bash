@@ -11,3 +11,5 @@ fi
 
 switch-context selecting
 task $task_id mod +selected
+
+task
