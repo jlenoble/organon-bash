@@ -1,0 +1,4 @@
+# Switching context:
+#   task context problem
+context.problem.read=+problem
+context.problem.write=+problem

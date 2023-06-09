@@ -1,0 +1,4 @@
+# Switching context:
+#   task context chore
+context.chore.read=+chore
+context.chore.write=+chore
