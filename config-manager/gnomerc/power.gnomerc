@@ -1,0 +1,5 @@
+[settings-daemon/plugins/power]
+power-button-action='interactive'
+sleep-inactive-ac-type='nothing'
+sleep-inactive-battery-timeout=900
+sleep-inactive-battery-type='nothing'
