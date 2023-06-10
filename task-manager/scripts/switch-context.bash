@@ -32,7 +32,7 @@ if [ -z $1 ]; then
     exit
 fi
 
-if [ $1 != workon ]; then
+if [ $1 != workon ] && [ $context != workon ]; then
     task +workon mod -workon -parent 2>/dev/null
 fi
 
