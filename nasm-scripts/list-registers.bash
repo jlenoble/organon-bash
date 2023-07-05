@@ -12,27 +12,27 @@ all)
     ;;
 
 lo*)
-    echo al bl cl dl
+    echo al cl dl bl
     ;;
 
 hi*)
-    echo ah bh ch dh
+    echo ah ch dh bh
     ;;
 
 16*)
-    echo ax bx cx dx di si bp sp
+    echo ax cx dx bx sp bp si di
     ;;
 
 32e*)
-    echo eax ebx ecx edx edi esi ebp esp r8d r9d r10d r11d r12d r13d r14d r15d
+    echo eax ecx edx ebx esp ebp esi edi r8d r9d r10d r11d r12d r13d r14d r15d
     ;;
 
 32*)
-    echo eax ebx ecx edx edi esi ebp esp
+    echo eax ecx edx ebx esp ebp esi edi
     ;;
 
 64*)
-    echo rax rbx rcx rdx rdi rsi rbp rsp r8 r9 r10 r11 r12 r13 r14 r15
+    echo rax rcx rdx rbx rsp rbp rsi rdi r8 r9 r10 r11 r12 r13 r14 r15
     ;;
 
 *)
