@@ -3,6 +3,16 @@ s() {
     ssh -X $1@localhost
 }
 
+# Launch VS Code as $1 user
+# If $2 is provided, open folder /home/$1/$2; default is /home/$1/Documents
+scode() {
+    user=$1
+    shift
+    folder=${1:-Documents}
+    shift
+    code --remote ssh-remote+$user@localhost "/home/$user/$folder" $@
+}
+
 # Launch Firefox as $1 user
 sfirefox() {
     user=$1
