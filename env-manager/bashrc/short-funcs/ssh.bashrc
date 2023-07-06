@@ -33,3 +33,17 @@ skmymoney() {
     shift
     ssh -X $user@localhost kmymoney $@
 }
+
+# Launch Nautilus as $1 user
+snautilus() {
+    user=$1
+    shift
+    ssh -X $user@localhost nautilus $@
+}
+
+# Launch Thunderbird as $1 user
+sthunderbird() {
+    user=$1
+    shift
+    ssh -X $user@localhost thunderbird $@
+}
