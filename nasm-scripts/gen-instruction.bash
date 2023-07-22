@@ -46,7 +46,7 @@ case $op_mode in
     done
 
     # r16, mem16
-    for src in $mem16; do
+    for src in $mem16 BX BP SI DI; do
         for dest in $r16; do
             echo "        $mnemonics $dest, [$src]"
         done
