@@ -5,3 +5,6 @@
 # Tmp files and dirs
 .tmp
 index.*rc
+
+# Private
+private
