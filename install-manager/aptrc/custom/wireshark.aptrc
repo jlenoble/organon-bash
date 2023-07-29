@@ -1,0 +1,4 @@
+# Wireshark
+
+sudo apt-get install wireshark
+sudo adduser $USER wireshark
