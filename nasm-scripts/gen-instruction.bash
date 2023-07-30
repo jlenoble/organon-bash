@@ -6,6 +6,7 @@ op_mode=${3:-16}
 
 imm8="0 12 16 150"
 imm16="0 12 16 150 1000 32768 50000"
+mem8="0 100 10000"
 mem16="0 100 10000"
 mem32="0 100 10000 1000000 100000000"
 mem64="0 100 10000 1000000 100000000 10000000000 1000000000000"
@@ -42,6 +43,13 @@ case $op_mode in
     for src in $imm16; do
         for dest in $r16; do
             echo "        $mnemonics $dest, $src"
+        done
+    done
+
+    # r8, mem8
+    for src in $mem8 BX BP SI DI; do
+        for dest in $r8; do
+            echo "        $mnemonics $dest, [$src]"
         done
     done
 
