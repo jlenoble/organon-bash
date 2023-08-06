@@ -1,0 +1,5 @@
+# NodeJS
+
+. custom/nvm.aptrc
+
+nvm install node
