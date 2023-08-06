@@ -1,5 +1,4 @@
 # NodeJS
 
-. custom/nvm.aptrc
-
-nvm install node
+. custom/node20.aptrc
+. custom/node18.aptrc

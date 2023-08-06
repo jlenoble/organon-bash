@@ -1,0 +1,5 @@
+# Node 12
+
+. custom/nvm.aptrc
+
+nvm install 18
