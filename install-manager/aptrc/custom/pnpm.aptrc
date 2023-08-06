@@ -1,0 +1,5 @@
+# Pnpm
+
+. custom/node.aptrc
+
+npm install pnpm -g
