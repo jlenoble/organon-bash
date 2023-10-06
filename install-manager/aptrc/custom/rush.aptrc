@@ -1,0 +1,5 @@
+# Rush
+
+. custom/node18.aptrc
+
+npm install -g @microsoft/rush
