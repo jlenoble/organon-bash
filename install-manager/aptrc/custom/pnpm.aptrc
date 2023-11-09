@@ -2,4 +2,4 @@
 
 . custom/node.aptrc
 
-npm install pnpm -g
+install-for-all-node-versions pnpm
