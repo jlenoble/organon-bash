@@ -1,0 +1,24 @@
+# Firefox Developer Edition
+
+. apt/wget.aptrc
+
+wget "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US" -O Firefox-dev.tar.bz2
+
+sudo tar xjf  Firefox-dev.tar.bz2 -C /opt/
+rm Firefox-dev.tar.bz2
+
+sudo ln -s /opt/firefox/firefox /usr/local/bin/firefox-dev
+
+sudo tee -a Firefox-dev.desktop > /dev/null <<EOT
+[Desktop Entry]
+Name=Firefox-developer-edition
+Exec=/usr/local/bin/firefox-dev
+Icon=/opt/firefox/browser/chrome/icons/default/default128.png
+comment=browser
+Type=Application
+Terminal=false
+Encoding=UTF-8
+Categories=Utility;
+EOT
+
+sudo mv Firefox-dev.desktop /usr/share/applications/
