@@ -28,7 +28,7 @@ Should be installed as root. Allows to limit the hours of access of particular w
 redirecting them to the local loop between a min time and a max time.
 
 The script ensures the computer forbids access to social media during work hours. When installed
-the black list is empty. See `add-host` to black-list an IP adress.
+the black list is empty. See [add-host](#add-hosts) to black-list a URL.
 
 Requires to be used as a root '@reboot' crontab.
 
@@ -46,4 +46,21 @@ sudo crontab -e
 ```sh
 # sudo crontab -e
 @reboot /root/bin/hosts.sh &
+```
+
+## add-host
+
+Not a script, but a compiled c++ program. Requires libboost.
+
+Blacklists a URL. To be used in combination with [hosts](#hosts)
+
+Can be run by anybody. Can only be undone by a sudoer.
+
+```bash
+g++ -std=c++17 ./c++/add-host.cpp -L/usr/lib/x86_64-linux-gnu -lstdc++fs -o add-host
+mv add-host ~/bin
+cd ~/bin
+sudo chown root:root add-host
+sudo chmod 4755 add-host
+cd -
 ```
