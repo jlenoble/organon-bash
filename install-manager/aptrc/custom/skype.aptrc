@@ -1,0 +1,6 @@
+# Skype
+
+wget https://go.skype.com/skypeforlinux-64.deb
+sudo apt install ./skypeforlinux-64.deb
+rm skypeforlinux-64.deb
+sudo apt-key export DF7587C3 | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/skype.gpg
