@@ -1,6 +1,7 @@
 # Dropbox
 
 . apt/wget.aptrc
+. apt/python3-gpg
 
 sudo apt-get install libpango1.0-0
 
