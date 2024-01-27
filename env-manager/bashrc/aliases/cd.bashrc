@@ -7,3 +7,4 @@ alias cdow='cd $PROJECTS_DIR/organon-wagtail'
 
 alias cdg='cd $PROJECTS_DIR/github'
 alias cdv='cd $PROJECTS_DIR/vault'
+alias cds='cd $PROJECTS_DIR/super-productivity'
