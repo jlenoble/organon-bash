@@ -1,0 +1,4 @@
+mkdir -p ~/Projets
+cd ~/Projets
+git clone git@github.com:jlenoble/vault
+cd -
