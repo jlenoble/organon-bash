@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-cd ~/Projets/organon-bash
-git checkout main
-git merge dev
-git push
-git checkout dev
-cd -
+if [ -d ./.git ]; then
+	git checkout main
+	git merge dev
+	git push
+	git checkout dev
+fi
