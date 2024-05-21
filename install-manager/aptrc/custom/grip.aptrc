@@ -1,5 +1,5 @@
 # Grip - markdown to html server
 
-. apt/pipx
+. apt/pipx.aptrc
 
 pipx install grip
