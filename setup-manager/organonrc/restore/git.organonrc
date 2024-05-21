@@ -1,0 +1,2 @@
+rclone sync GoogleDriveEncrypted:BackUp/.gitconfig ~
+chmod 600 ~/.gitconfig
