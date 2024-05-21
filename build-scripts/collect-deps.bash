@@ -8,6 +8,11 @@
 
 _MAIN_FILE=$1
 _MAIN_DIR=$(dirname $_MAIN_FILE)
+_ENTRY_FILE_SUBDIR=$3
+
+if [ $(basename $_MAIN_DIR) == "$_ENTRY_FILE_SUBDIR" ]; then
+    _MAIN_DIR=$(dirname $_MAIN_DIR)
+fi
 
 _AVATAR=$2
 
@@ -26,7 +31,7 @@ collect-deps() {
     local -a list=($(get-deps $1))
     all_deps["$1"]=1
     local -i cnt=${#list[@]}
-    if (( cnt > 0 )); then
+    if ((cnt > 0)); then
         for f in "${list[@]}"; do
             if ! [[ -v all_deps["$f"] ]]; then
                 collect-deps "$f"
