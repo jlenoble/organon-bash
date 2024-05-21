@@ -16,4 +16,4 @@ build-rc _ organonrc "$SCRIPT_DIR" "config/$ENTRY_FILE_STEM" config 2>&1 >/dev/n
 # Exec custom built script
 $TMP_DIR/organonrc.tmp
 
-unset SCRIPT_DIR TMP_DIR
+unset SCRIPT_DIR TMP_DIR ENTRY_FILE_STEM
