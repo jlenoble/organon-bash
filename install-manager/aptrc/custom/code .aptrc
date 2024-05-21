@@ -1,0 +1,7 @@
+# Code
+
+. apt/wget.aptrc
+
+wget  -c "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O code-stable.deb
+sudo dpkg -i code-stable.deb
+rm code-stable.deb
