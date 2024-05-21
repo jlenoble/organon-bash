@@ -1,1 +1,9 @@
-sudo apt-get install rclone
+RCLONE=$(which rclone)
+
+if [ -z $RCLONE ]; then
+	sudo apt-get install rclone
+else
+	echo "Found rclone at $RCLONE"
+fi
+
+unset RCLONE
