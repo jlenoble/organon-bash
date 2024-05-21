@@ -1,1 +1,1 @@
-. prompts/fancy-prompt.bashoption
+. prompts/pretty-prompt.bashoption
