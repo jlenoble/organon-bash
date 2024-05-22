@@ -1,4 +1,19 @@
+# Vault
+
+. install/rush.organonrc
+. install/ng.organonrc
+
 mkdir -p ~/Projets
 cd ~/Projets
 git clone git@github.com:jlenoble/vault
-cd -
+
+cd vault
+nvm use 20
+
+sed -i 's+registry=http://localhost:4873+#registry=http://localhost:4873+;s+#registry=https://registry.npmjs.org/+registry=https://registry.npmjs.org/+' ./common/config/rush/.npmrc
+rush verdaccio
+# Here the process will hang; It will resume when running 'kill-verdaccio' in another terminal
+
+sed -i 's+#registry=http://localhost:4873+registry=http://localhost:4873+;s+registry=https://registry.npmjs.org/+#registry=https://registry.npmjs.org/+' ./common/config/rush/.npmrc
+rush update
+# Here the process will attempt to connect to verdaccio which should be launched in another terminal

@@ -1,0 +1,5 @@
+# Rush
+
+. install/node.organonrc
+
+install-for-all-node-versions @microsoft/rush

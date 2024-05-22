@@ -1,0 +1,5 @@
+# Node 20
+
+. install/nvm.organonrc
+
+nvm install 20

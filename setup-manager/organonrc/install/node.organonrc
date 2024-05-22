@@ -1,0 +1,17 @@
+# NodeJS
+
+. install/node20.organonrc
+#. install/node18.organonrc
+
+install-for-all-node-versions() {
+	pkg=$1
+	current_version="$(node --version)"
+	npm install -g strip-ansi-cli
+
+    versions="$(nvm list | strip-ansi | sed -e '/->/d') $current_version"
+
+	for version in $versions; do
+		nvm use $version
+		npm install -g $pkg
+	done
+}

@@ -1,0 +1,11 @@
+# curl
+
+_CMD=$(which curl)
+
+if [ -z $_CMD ]; then
+	sudo apt-get install curl
+else
+	echo "Found curl at $_CMD"
+fi
+
+unset _CMD

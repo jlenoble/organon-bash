@@ -1,11 +1,11 @@
 # rclone
 
-RCLONE=$(which rclone)
+_CMD=$(which rclone)
 
-if [ -z $RCLONE ]; then
+if [ -z $_CMD ]; then
 	sudo apt-get install rclone
 else
-	echo "Found rclone at $RCLONE"
+	echo "Found rclone at $_CMD"
 fi
 
-unset RCLONE
+unset _CMD
