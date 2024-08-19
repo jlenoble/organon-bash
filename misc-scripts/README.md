@@ -50,7 +50,7 @@ sudo crontab -e
 
 ## add-host
 
-Not a script, but a compiled c++ program. Requires libboost.
+Not a script, but a compiled c++ program.
 
 Blacklists a URL. To be used in combination with [hosts](#hosts)
 
@@ -62,5 +62,22 @@ mv add-host ~/bin
 cd ~/bin
 sudo chown root:root add-host
 sudo chmod 4755 add-host
+cd -
+```
+
+## toggle-block
+
+Not a script, but a compiled c++ program. Requires libboost.
+
+Block/unblock access to a strongly encrypted passwd file on the strongly encrypted SDD. By default, there are no sudoers on the computer and nobody, even myself, knows the superuser passwd, nor is it saved anywhere except in the blocked file on disk.
+
+Unblocking requires at least 12 hours of uninterrupted running. Beware that [shutdown](#shutdown) defines a time span greater than the latter duration or the computer will be irrevocably blocked.
+
+```bash
+g++ -std=c++17  ./c++/toggle-block.cpp -I/usr/include/boost -L/usr/lib/x86_64-linux-gnu -lboost_system -lboost_thread -lpthread -o toggle-block
+mv toggle-block ~/bin
+cd ~/bin
+sudo chown root:root toggle-block
+sudo chmod 4755 toggle-block
 cd -
 ```
