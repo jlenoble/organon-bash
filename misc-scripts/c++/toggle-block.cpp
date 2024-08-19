@@ -13,8 +13,10 @@
 //
 
 #include <boost/asio.hpp>
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include <ctime>
+
+using namespace boost::placeholders;
 
 // A custom implementation of the Clock concept from the standard C++ library.
 struct time_t_clock
@@ -195,9 +197,9 @@ int main(int argc, char *argv[])
     const std::string name = "/home/jason/passwd.7z";
 
     Mode mode(name);
-    // mode.toggle(43200); // 12h
+    mode.toggle(43200); // 12h
     // mode.toggle(39600); // 11h
-    mode.toggle(10); // test: 10s
+    // mode.toggle(10); // test: 10s
 
     return 0;
 }
