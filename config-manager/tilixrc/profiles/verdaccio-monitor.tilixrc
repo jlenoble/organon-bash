@@ -1,14 +1,14 @@
-[profiles/8a45b08a-de41-46f1-8d35-691eda6d68e9]
+[profiles/2fff214e-875c-4134-abe8-8c91ea06fc4b]
 allow-bold=true
 automatic-switch=@as []
 background-color='#263238'
-background-transparency-percent=52
+background-transparency-percent=0
 backspace-binding='ascii-delete'
 badge-color='#ffffff'
 badge-color-set=false
 badge-font='Monospace 16'
 badge-position='southeast'
-badge-text='last backups'
+badge-text='verdaccio'
 badge-use-system-font=false
 bold-color='#ffffff'
 bold-color-set=false
@@ -21,7 +21,7 @@ cursor-blink-mode='system'
 cursor-colors-set=false
 cursor-foreground-color='#ffffff'
 cursor-shape='block'
-custom-command='backup-watch'
+custom-command='verdaccio'
 custom-hyperlinks=@as []
 default-size-columns=95
 default-size-rows=24
@@ -54,4 +54,4 @@ triggers=@as []
 use-custom-command=true
 use-system-font=false
 use-theme-colors=false
-visible-name='Backup monitor'
+visible-name='Verdaccio monitor'
