@@ -1,4 +1,4 @@
 [settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Control><Alt>t'
-command='tilix --full-screen -s /home/jason/.config/tilix/task-workspace.json'
+command='tilix --full-screen -s /home/jason/Projets/organon-bash/config-manager/tilixrc/workspaces/main-monitors.json -s /home/jason/Projets/organon-bash/config-manager/tilixrc/workspaces/2x2.json'
 name='Tilix'
