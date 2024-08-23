@@ -1,0 +1,5 @@
+backup-to-external-drive rule />>>>>.*at / --> white on gray7 match
+backup-to-external-drive rule /[0-9]{4}\/[0-9]{2}\/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]+/ --> yellow on gray7 match
+#backup-to-external-drive rule /^bookworm.*\/$/ --> suppress
+#backup-to-external-drive rule /^\/home.*: ligne [0-9]{2}:/ --> blank
+backup-to-external-drive rule /^External drive is not mounted/ --> underline red match
