@@ -6,22 +6,29 @@ BACKUP_PATH="GoogleDriveEncrypted:BackUp"
 RCLONE_RELPATH=/home
 
 backedupfiles=~/Documents/saved-files.txt
+logfile=~/logs/backup-to-google-drive.log
 
-while IFS='' read -r line; do
-	line=$(echo $line | xargs)
+(
+	echo ">>>>> Start BackUp at $(date +"%Y/%m/%d %H:%M:%S %Z")"
 
-	if [[ -z $line ]] || [[ ${line:0:1} == '#' ]]; then
-		echo "Skipping line: $line" 1>&2
-	else
-		if [ -d "$RCLONE_RELPATH/$line" ]; then
-			REL_DIR=$line
-			rclone sync "$RCLONE_RELPATH/$REL_DIR" "$BACKUP_PATH/$REL_DIR" -vv
+	while IFS='' read -r line; do
+		line=$(echo $line | xargs)
+
+		if [[ -z $line ]] || [[ ${line:0:1} == '#' ]]; then
+			echo "Skipping line: $line"
 		else
-			REL_DIR=$(dirname $line)
-			rclone sync "$RCLONE_RELPATH/$line" "$BACKUP_PATH/$REL_DIR" -vv
+			if [ -d "$RCLONE_RELPATH/$line" ]; then
+				REL_DIR=$line
+				rclone sync "$RCLONE_RELPATH/$REL_DIR" "$BACKUP_PATH/$REL_DIR" -vv
+			else
+				REL_DIR=$(dirname $line)
+				rclone sync "$RCLONE_RELPATH/$line" "$BACKUP_PATH/$REL_DIR" -vv
+			fi
 		fi
-	fi
 
-done <"$backedupfiles"
+	done <"$backedupfiles"
 
-unset BACKUP_PATH RCLONE_RELPATH REL_DIR backedupfiles
+	echo ">>>>> End BackUp at $(date +"%Y/%m/%d %H:%M:%S %Z")"
+) | tee -a "$logfile"
+
+unset BACKUP_PATH RCLONE_RELPATH REL_DIR backedupfiles logfile
