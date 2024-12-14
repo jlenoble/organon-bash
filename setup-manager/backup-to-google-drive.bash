@@ -17,12 +17,13 @@ logfile=~/logs/backup-to-google-drive.log
 		if [[ -z $line ]] || [[ ${line:0:1} == '#' ]]; then
 			echo "Skipping line: $line"
 		else
+			echo "Processing line: $line"
 			if [ -d "$RCLONE_RELPATH/$line" ]; then
 				REL_DIR=$line
-				rclone sync "$RCLONE_RELPATH/$REL_DIR" "$BACKUP_PATH/$REL_DIR" -vv
+				rclone sync --progress --fast-list "$RCLONE_RELPATH/$REL_DIR" "$BACKUP_PATH/$REL_DIR"
 			else
 				REL_DIR=$(dirname $line)
-				rclone sync "$RCLONE_RELPATH/$line" "$BACKUP_PATH/$REL_DIR" -vv
+				rclone sync --progress --fast-list "$RCLONE_RELPATH/$line" "$BACKUP_PATH/$REL_DIR"
 			fi
 		fi
 
