@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=App quick launch or raise
+Exec=/home/jason/bin/app-open-or-raise %u
+Type=Application
+NoDisplay=true
+MimeType=x-scheme-handler/quicklaunch;
